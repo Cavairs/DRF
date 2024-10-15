@@ -5,8 +5,9 @@ class Project(models.Model):
     """Объект на котором проводят измерения."""
 
     name = models.TextField()
-    latitude = models.FloatField()
-    longitude = models.FloatField()
+    latitude = models.FloatField(null=True)
+    longitude = models.FloatField(null=True)
+    description= models.TextField()
     created_at = models.DateTimeField(
         auto_now_add=True
     )
@@ -19,7 +20,7 @@ class Measurement(models.Model):
     """Измерение температуры на объекте."""
 
     value = models.FloatField()
-    project = models.ForeignKey(Project, on_delete=models.CASCADE)
+    project = models.ForeignKey(Project, on_delete=models.CASCADE, related_name='measurements') 
     created_at = models.DateTimeField(
         auto_now_add=True
     )
